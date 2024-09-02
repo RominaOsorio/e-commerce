@@ -5,6 +5,7 @@ import './main.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { HashRouter } from 'react-router-dom'
 import { Auth0Provider } from '@auth0/auth0-react'
+import TecnoProvider from './context/TecnoContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           redirect_uri: window.location.origin
         }}
       >
-        <App />
+        <TecnoProvider>
+          <App />
+        </TecnoProvider>
       </Auth0Provider>
     </HashRouter>
   </React.StrictMode>
