@@ -45,8 +45,8 @@ const Detail = () => {
                       })}
                   </ul>
                   <div className='d-flex justify-content-center gap-2'>
-                    <Button onClick={() => navigate('/productos')} variant='primary'>Regresar</Button>
-                    <Button onClick={() => agregarProducto(productoDetail)} variant='primary'>Añadir</Button>
+                    <Button onClick={() => navigate('/productos')} variant='dark'>Regresar</Button>
+                    <Button onClick={() => agregarProducto(productoDetail)} variant='dark'>Añadir</Button>
                   </div>
                 </Card.Body>
               </Card>

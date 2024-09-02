@@ -4,8 +4,7 @@ import { TecnoContext } from '../context/TecnoContext'
 import { useContext, useEffect, useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { FaUser, FaShoppingCart, FaStore, FaHeart, FaHome } from 'react-icons/fa'
-import { IoLogOut } from 'react-icons/io5'
-import logo from '../assets/logo.png' // Importa el logo desde la carpeta assets
+import logo from '../assets/logo.png'
 
 const Navigation = () => {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
@@ -62,11 +61,13 @@ const Navigation = () => {
                     <NavLink className={handleMenu} to='/profile'><FaUser /></NavLink>
                     <NavLink className={handleMenu} to='/favoritos'><FaHeart /></NavLink>
                     <NavLink className={handleMenu} to='/carrito'><FaShoppingCart />{formattedTotal}</NavLink>
-                    <NavLink
-                      className={handleMenu}
-                      onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
-                    >
-                      <IoLogOut />
+                    <NavLink>
+                      <Button
+                        className='ms-2 px-3'
+                        onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+                        variant='light'
+                      >Logout
+                      </Button>
                     </NavLink>
                   </>
                   )
