@@ -1,8 +1,10 @@
 import { Card, Row, Container, Button } from 'react-bootstrap'
 import Testimonials from '../components/Testimonials'
 import Banners from '../components/Banners'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
+  const navigate = useNavigate()
   return (
     <>
       <Card className='col-12'>
@@ -20,7 +22,7 @@ const Home = () => {
                 <Card.Title>Inicia sesión para mejorar tu experiencia de compra</Card.Title>
               </div>
               <div>
-                <Button className='ms-2 px-5' variant='dark'>Login</Button>
+                <Button onClick={() => navigate('/login')} className='ms-2 px-5' variant='dark'>Login</Button>
               </div>
             </Card.Body>
           </Card>
