@@ -53,6 +53,16 @@ export const TecnoProvider = ({ children }) => {
     }
   }
 
+  const eliminarProducto = (index) => {
+    const nuevoCarrito = [...carrito]
+    nuevoCarrito.splice(index, 1)
+    setCarrito(nuevoCarrito)
+  }
+
+  const vaciarCarrito = () => {
+    setCarrito([])
+  }
+
   const addAndRemoveFavorite = (id) => {
     const newProductos = productos.map(producto => {
       if (producto.id === id) {
@@ -77,7 +87,9 @@ export const TecnoProvider = ({ children }) => {
     incrementar,
     decrementar,
     addAndRemoveFavorite,
-    formatPrice // para usar en componentes que necesiten formatear precios
+    formatPrice,
+    eliminarProducto,
+    vaciarCarrito
   }
 
   return (

@@ -1,11 +1,8 @@
 import { Card, Row, Container, Button } from 'react-bootstrap'
-import { useAuth0 } from '@auth0/auth0-react'
 import Testimonials from '../components/Testimonials'
 import Banners from '../components/Banners'
 
 const Home = () => {
-  const { loginWithRedirect } = useAuth0()
-
   return (
     <>
       <Card className='col-12'>
@@ -23,13 +20,7 @@ const Home = () => {
                 <Card.Title>Inicia sesión para mejorar tu experiencia de compra</Card.Title>
               </div>
               <div>
-                <Button
-                  className='ms-2 px-5'
-                  onClick={() => {
-                    loginWithRedirect()
-                  }} variant='dark'
-                >Login
-                </Button>
+                <Button className='ms-2 px-5' variant='dark'>Login</Button>
               </div>
             </Card.Body>
           </Card>
