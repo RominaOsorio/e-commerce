@@ -1,18 +1,17 @@
-import { Container, Nav, Navbar, Button } from 'react-bootstrap'
+import { Container, Nav, Navbar } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import { TecnoContext } from '../context/TecnoContext'
+import { AuthContext } from '../context/AuthContext'
 import { useContext, useEffect, useState } from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
 import { FaUser, FaShoppingCart, FaStore, FaHeart, FaHome } from 'react-icons/fa'
 import logo from '../assets/logo.png'
 
 const Navigation = () => {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
   const { carrito, formatPrice } = useContext(TecnoContext)
+  const { isAuthenticated, logout } = useContext(AuthContext)
   const total = carrito.reduce(
     (acumulador, valorActual) => acumulador + valorActual.precio * valorActual.count, 0
   )
-
   const formattedTotal = formatPrice(total)
 
   const handleMenu = ({ isActive }) => isActive ? 'nav-item nav-link active' : 'nav-item nav-link'
@@ -54,34 +53,21 @@ const Navigation = () => {
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
               <NavLink className={handleMenu} to='/'><FaHome /></NavLink>
-              {isAuthenticated
-                ? (
-                  <>
-                    <NavLink className={handleMenu} to='/productos'><FaStore /></NavLink>
-                    <NavLink className={handleMenu} to='/profile'><FaUser /></NavLink>
-                    <NavLink className={handleMenu} to='/favoritos'><FaHeart /></NavLink>
-                    <NavLink className={handleMenu} to='/carrito'><FaShoppingCart />{formattedTotal}</NavLink>
-                    <NavLink>
-                      <Button
-                        className='ms-2 px-3'
-                        onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
-                        variant='light'
-                      >Logout
-                      </Button>
-                    </NavLink>
-                  </>
-                  )
-                : (
-                  <NavLink>
-                    <Button
-                      className='ms-2 px-3'
-                      onClick={() => loginWithRedirect()}
-                      variant='light'
-                    >
-                      Login
-                    </Button>
-                  </NavLink>
-                  )}
+              {isAuthenticated && (
+                <>
+                  <NavLink className={handleMenu} to='/productos'><FaStore /></NavLink>
+                  <NavLink className={handleMenu} to='/profile'><FaUser /></NavLink>
+                  <NavLink className={handleMenu} to='/favoritos'><FaHeart /></NavLink>
+                  <NavLink className={handleMenu} to='/carrito'><FaShoppingCart />{formattedTotal}</NavLink>
+                  <Nav.Link onClick={logout}>Logout</Nav.Link>
+                </>
+              )}
+              {!isAuthenticated && (
+                <>
+                  <NavLink className={handleMenu} to='/login'>Login</NavLink>
+                  <NavLink className={handleMenu} to='/register'>Registrarse</NavLink>
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
