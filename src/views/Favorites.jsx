@@ -10,6 +10,7 @@ const Favorites = () => {
   return (
     <Container className='py-5'>
       <Row>
+        <h2>Mis productos favoritos</h2>
         {productos &&
           productos.filter(producto => producto.like).map(producto => (
             <div key={producto.id} className='col-12 col-md-6 col-lg-3 mb-5 text-center'>

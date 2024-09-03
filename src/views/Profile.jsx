@@ -1,5 +1,5 @@
-import { useAuth0 } from '@auth0/auth0-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 import axios from 'axios'
 import { Container, Row } from 'react-bootstrap'
 import FormPost from '../components/FormPost'
@@ -8,7 +8,7 @@ import Articulos from '../components/Articulos'
 const urlBaseServer = 'http://localhost:3000'
 
 const Profile = () => {
-  const { user, isAuthenticated, isLoading, logout } = useAuth0()
+  const { isAuthenticated, logout } = useContext(AuthContext)
   const [nombre, setNombre] = useState('')
   const [img, setImg] = useState('')
   const [desc, setDesc] = useState('')
@@ -17,11 +17,7 @@ const Profile = () => {
   const [articulos, setArticulos] = useState([])
 
   if (!isAuthenticated) {
-    return logout({ returnTo: window.location.origin })
-  }
-
-  if (isLoading) {
-    return <div>Loading ...</div>
+    logout()
   }
 
   const vaciarFormulario = () => {
@@ -68,13 +64,7 @@ const Profile = () => {
   return (
     <Container className='text-center my-5'>
       <Row>
-        {isAuthenticated && (
-          <div>
-            <img className='rounded' src={user.picture} alt={user.name} />
-            <h2>Hola {user.name}</h2>
-            <p>{user.email}</p>
-          </div>
-        )}
+        <h2>Welcome</h2>
       </Row>
 
       <Container>
